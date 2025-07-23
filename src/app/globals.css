@@ -1,0 +1,168 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 48 33% 94%; /* #F5F2E7 Soft Cream/Beige */
+    --foreground: 220 13% 25%; /* Dark Blue-Gray */
+
+    --card: 48 33% 98%;
+    --card-foreground: 220 13% 25%;
+
+    --popover: 48 33% 98%;
+    --popover-foreground: 220 13% 25%;
+
+    --primary: 212 23% 61%; /* #829AB1 Dusty Blue */
+    --primary-foreground: 220 13% 15%;
+
+    --secondary: 212 23% 92%; /* Lighter Dusty Blue */
+    --secondary-foreground: 220 13% 25%;
+
+    --muted: 212 23% 90%;
+    --muted-foreground: 220 13% 45%;
+
+    --accent: 43 25% 78%; /* #D2B48C Tan/Beige */
+    --accent-foreground: 220 13% 15%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 212 23% 84%; /* Dusty Blue, lighter */
+    --input: 212 23% 92%;
+    --ring: 212 23% 61%; /* Dusty Blue */
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 220 13% 10%;
+    --foreground: 48 33% 94%;
+
+    --card: 220 13% 15%;
+    --card-foreground: 48 33% 94%;
+
+    --popover: 220 13% 15%;
+    --popover-foreground: 48 33% 94%;
+
+    --primary: 212 23% 61%;
+    --primary-foreground: 220 13% 10%;
+
+    --secondary: 220 13% 20%;
+    --secondary-foreground: 48 33% 94%;
+
+    --muted: 220 13% 25%;
+    --muted-foreground: 48 33% 85%;
+
+    --accent: 43 25% 78%;
+    --accent-foreground: 220 13% 10%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 212 23% 40%;
+    --input: 220 13% 20%;
+    --ring: 212 23% 61%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-lato), sans-serif;
+    scroll-behavior: smooth;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-playfair-display), serif;
+  }
+  section {
+    @apply min-h-screen py-16 md:py-24 px-4 md:px-8 flex flex-col items-center justify-center;
+  }
+}
+
+/* Custom animation for scroll effects */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+/* Custom Carousel Fade Styles */
+.embla--fade .embla__slide {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+.embla--fade .embla__slide.is-in-view {
+  opacity: 1;
+}
+
+/* Bokeh Background Effect */
+@keyframes move-up {
+  0% { transform: translateY(100vh) scale(0.5); opacity: 0.1; }
+  100% { transform: translateY(-10vh) scale(1); opacity: 0.8; }
+}
+
+.hero-section::before,
+.hero-section::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background-color: hsla(var(--primary) / 0.2);
+  filter: blur(60px);
+  will-change: transform;
+}
+
+.hero-section::before {
+  width: 300px;
+  height: 300px;
+  left: 10%;
+  bottom: 0;
+  animation: move-up 20s infinite alternate ease-in-out;
+}
+
+.hero-section::after {
+  width: 400px;
+  height: 400px;
+  right: 10%;
+  bottom: 0;
+  animation: move-up 25s infinite alternate-reverse ease-in-out 3s;
+}
+
+/* SVG Vine Drawing Animation */
+@keyframes draw-vine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-vine {
+  animation: draw-vine 5s ease-out forwards;
+}
+
+/* Ring pulse animation */
+@keyframes ring-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.7;
+  }
+}
+
+.animate-ring {
+  animation: ring-pulse 6s infinite ease-in-out;
+}
