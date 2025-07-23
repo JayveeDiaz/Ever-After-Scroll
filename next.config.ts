@@ -1,8 +1,12 @@
+import type { NextConfig } from 'next';
 
-import type {NextConfig} from 'next';
+const isProd = process.env.NODE_ENV === 'production';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: 'export', // Enables static export (required for GitHub Pages)
+  basePath: isProd ? '/Ever-After-Scroll' : '', // Needed for subpath hosting
+  assetPrefix: isProd ? '/Ever-After-Scroll/' : '', // Ensure static files load correctly
+
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -10,6 +14,7 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
+    unoptimized: true, // Disable Next.js image optimization (no server-side processing)
     remotePatterns: [
       {
         protocol: 'https',
